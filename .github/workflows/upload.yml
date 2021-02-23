@@ -52,7 +52,7 @@ jobs:
           pwd
           ls -a
           git init
-          git remote add origin "https://Duncan-Ultra:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.TARGET_REPOS }}.git"
+          git remote add origin "https://Duncan-Ultra:${{ secrets.GITHUB_TOKEN }}@github.com/github-actions-test.git"
           git config --global user.name "duncan@ultra.io"
           git config --global user.name "duncan-ultra"
           git fetch
