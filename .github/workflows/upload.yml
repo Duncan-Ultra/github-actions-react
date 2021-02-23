@@ -30,19 +30,27 @@ jobs:
         with:
           name: code-coverage
           path: coverage
-  commit:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Clone target folder
-        run: |
-          pwd
-          ls -a
-          git init
-          git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.TARGET_REPOS }}.git"
-          git config --global user.name "duncan@ultra.io"
-          git config --global user.name "duncan-ultra"
-          git fetch
-          git checkout master
-          git branch --set-upstream-to=origin/master
-          git pull
-          ls -a
+      - uses: actions/checkout@v2
+        with:
+          repository: Duncan-Ultra/github-actions-test
+          path: github-test
+  # commit:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         repository: Duncan-Ultra/github-actions-test
+          # path: github-test
+      # - name: Clone target folder
+      #   run: |
+      #     pwd
+      #     ls -a
+      #     git init
+      #     git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.TARGET_REPOS }}.git"
+      #     git config --global user.name "duncan@ultra.io"
+      #     git config --global user.name "duncan-ultra"
+      #     git fetch
+      #     git checkout master
+      #     git branch --set-upstream-to=origin/master
+      #     git pull
+      #     ls -a
