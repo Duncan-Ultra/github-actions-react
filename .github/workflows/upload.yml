@@ -46,12 +46,12 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: code-coverage
-      - name: Extract artifact
+          path: artifact
+      - name: Commit change
         run: |
-          ls -a
-          sudo apt-get install unzip
-          unzip code-coverage
-          ls -a
+          git add -A
+          git commit -m"Update Artifact"
+          git push
       # - name: Clone target folder
       #   run: |
       #     pwd
