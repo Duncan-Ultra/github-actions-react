@@ -53,8 +53,6 @@ jobs:
           ls -a
           git init
           git remote add origin "https://Duncan-Ultra:${{ secrets.GITHUB_TOKEN }}@github.com/Duncan-Ultra/github-actions-test.git"
-          git config --global user.name "duncan@ultra.io"
-          git config --global user.name "duncan-ultra"
           git fetch
           git checkout master
           git branch --set-upstream-to=origin/master
@@ -65,6 +63,8 @@ jobs:
           git add -A
           git commit -m"Random file"
           git config -l | grep 'http\..*\.extraheader' | cut -d= -f1 | xargs -L1 git config --unset-all
+          git config --global user.name "duncan@ultra.io"
+          git config --global user.name "duncan-ultra"
           git push "https://Duncan-Ultra:${{ secrets.GITHUB_TOKEN }}@github.com/Duncan-Ultra/github-actions-test.git" master:master
       # - name: Clone target folder
       #   run: |
