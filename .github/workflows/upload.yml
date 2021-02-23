@@ -48,8 +48,9 @@ jobs:
           name: code-coverage
       - name: Extract artifact
         run: |
+          ls -a
           sudo apt-get install unzip
-          unzip code-coverage.zip
+          unzip code-coverage
           ls -a
       # - name: Clone target folder
       #   run: |
