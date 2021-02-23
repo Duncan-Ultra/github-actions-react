@@ -42,6 +42,15 @@ jobs:
         run: |
           pwd
           ls -a
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: code-coverage
+      - name: Extract artifact
+        run: |
+          sudo apt-get install unzip
+          unzip code-coverage.zip
+          ls -a
       # - name: Clone target folder
       #   run: |
       #     pwd
