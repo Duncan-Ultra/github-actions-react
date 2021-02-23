@@ -30,17 +30,18 @@ jobs:
         with:
           name: code-coverage
           path: coverage
-      - uses: actions/checkout@v2
+  commit:
+    needs: [build]
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Clone target
+        uses: actions/checkout@v2
         with:
           repository: Duncan-Ultra/github-actions-test
-          path: github-test
-  # commit:
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         repository: Duncan-Ultra/github-actions-test
-          # path: github-test
+      - name: Check
+        run: |
+          pwd
+          ls -a
       # - name: Clone target folder
       #   run: |
       #     pwd
