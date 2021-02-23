@@ -1,0 +1,48 @@
+name: Upload
+on:
+  pull_request:
+    branches: [develop]
+  push:
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Use NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm ci
+      - run: npm test -- --coverage
+        env:
+          CI: true
+      - name: Upload Test coverage
+        uses: actions/upload-artifact@v1
+        with:
+          name: code-coverage
+          path: coverage
+  commit:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Clone target folder
+        run: |
+          pwd
+          ls -a
+          git init
+          git remote add origin "https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ secrets.TARGET_REPOS }}.git"
+          git config --global user.name "duncan@ultra.io"
+          git config --global user.name "duncan-ultra"
+          git fetch
+          git checkout master
+          git branch --set-upstream-to=origin/master
+          git pull
+          ls -a
